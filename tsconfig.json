@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"allowJs": false,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": false,
+		"esModuleInterop": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"jsx": "preserve",
+		"noImplicitAny": true,
+		"sourceMap": false,
+		"strictNullChecks": true,
+		"baseUrl": ".",
+		"rootDir": "src",
+		"outDir": "dist",
+		"paths": {
+			"@/*": ["./src/*", "./dist/*"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

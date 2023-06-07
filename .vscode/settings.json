@@ -1,0 +1,15 @@
+{
+	"azureFunctions.deploySubpath": ".",
+	"azureFunctions.postDeployTask": "npm install (functions)",
+	"azureFunctions.projectLanguage": "TypeScript",
+	"azureFunctions.projectRuntime": "~4",
+	"debug.internalConsoleOptions": "neverOpen",
+	"azureFunctions.projectLanguageModel": 4,
+	"azureFunctions.preDeployTask": "npm prune (functions)",
+	"eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+	"editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.rulers": [120],
+	"typescript.tsdk": "node_modules/typescript/lib"
+}
