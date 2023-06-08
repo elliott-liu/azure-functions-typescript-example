@@ -1,3 +1,4 @@
+import { getValuesFromRequestQuery } from "@/utils/getValuesFromRequestQuery";
 import {
 	app,
 	HttpRequest,
@@ -6,7 +7,6 @@ import {
 } from "@azure/functions";
 import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
-import { getValuesFromRequestQuery } from "../utils/getValuesFromRequestQuery";
 
 const querySchema = z.object({
 	name: z.string().min(1).pipe(z.coerce.string()),
