@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-		"target": "es6",
+		"target": "ES6",
 		"allowJs": false,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": false,
 		"esModuleInterop": true,
-		"module": "commonjs",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"jsx": "preserve",
@@ -17,7 +17,7 @@
 		"rootDir": "src",
 		"outDir": "dist",
 		"paths": {
-			"@/*": ["./src/*", "./dist/*"]
+			"@/*": ["./src/*"]
 		}
 	},
 	"exclude": ["node_modules"]

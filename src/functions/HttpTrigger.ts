@@ -4,19 +4,28 @@ import {
 	HttpResponseInit,
 	InvocationContext,
 } from "@azure/functions";
-import { z, ZodError, type ZodSchema } from "zod";
+import { z } from "zod";
 import { fromZodError } from "zod-validation-error";
+import { getValuesFromRequestQuery } from "../utils/getValuesFromRequestQuery";
 
-const requestSchema = z.string().array().min(1);
-
-const requestQuerySchema = z.object({
-	name: requestSchema.max(1).pipe(z.coerce.string()),
-	many: requestSchema.optional(),
-	string: requestSchema.max(1).pipe(z.coerce.string()).optional(),
-	posNumber: requestSchema.max(1).pipe(z.coerce.number().positive()).optional(),
-	range: requestSchema.max(1).pipe(z.coerce.number().min(0).max(5)).optional(),
-	plainDate: requestSchema
-		.max(1)
+const querySchema = z.object({
+	name: z.string().min(1).pipe(z.coerce.string()),
+	many: z
+		.string()
+		.min(1)
+		.transform((v) =>
+			v.split(",").map(function (item) {
+				return item.trim();
+			})
+		)
+		.pipe(z.array(z.coerce.string()))
+		.optional(),
+	string: z.string().min(1).pipe(z.coerce.string()).optional(),
+	posNumber: z.string().min(1).pipe(z.coerce.number().positive()).optional(),
+	range: z.string().min(1).pipe(z.coerce.number().min(0).max(5)).optional(),
+	plainDate: z
+		.string()
+		.min(1)
 		.pipe(
 			z.coerce.string().refine(
 				(v) => /\d{4}-\d{2}-\d{2}/.test(v),
@@ -38,7 +47,7 @@ export async function HttpTrigger(
 
 	const rawBody = await request.text();
 
-	const parsedRequest = getValuesFromRequestQuery(request, requestQuerySchema);
+	const parsedRequest = getValuesFromRequestQuery(request, querySchema);
 
 	if (!parsedRequest.success) {
 		return { body: fromZodError(parsedRequest.error).message, status: 400 };
@@ -61,23 +70,3 @@ app.http("HttpTrigger", {
 	authLevel: "anonymous",
 	handler: HttpTrigger,
 });
-
-function getValuesFromRequestQuery(
-	request: HttpRequest,
-	schema: ZodSchema
-):
-	| { success: true; data: z.infer<typeof requestQuerySchema> }
-	| { success: false; error: ZodError } {
-	const values = valuesFromSearchParams(request.query);
-	return schema.safeParse(values);
-}
-
-function valuesFromSearchParams(requestQuery: URLSearchParams) {
-	return Array.from(requestQuery.keys()).reduce(
-		(values, key) => ({
-			...values,
-			[key]: requestQuery.getAll(key),
-		}),
-		{} as Record<string, Array<string> | string>
-	);
-}
