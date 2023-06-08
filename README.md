@@ -8,7 +8,7 @@ Azure Function (V4) in TypeScript, aiming to implement strong type safety and a 
 
 - [ ] Implement environment variable type safety
 - [x] Use bundler to handle module resolution (using Rollup)
-- [x] Get utils import working
+- [x] Get module imports working
 
 ## Configuration
 
