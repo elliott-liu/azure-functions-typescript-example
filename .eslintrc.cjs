@@ -1,5 +1,19 @@
-/** @type {import("@types/eslint").Linter.Config} */
+/**
+ * @type {import("eslint").Linter.Config}
+ */
+
 module.exports = {
+	env: {
+		es2022: true,
+	},
+	overrides: [
+		{
+			files: ["**/*.cjs"],
+			env: {
+				node: true,
+			},
+		},
+	],
 	root: true,
 	parser: "@typescript-eslint/parser",
 	plugins: ["@typescript-eslint", "prettier"],

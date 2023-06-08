@@ -1,5 +1,9 @@
-/** @type {import('prettier').Config} */
-/** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
+/**
+ * @type {import('prettier').Options}
+ * @type {import('prettier').Config}
+ * @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig}
+ */
+
 module.exports = {
 	$schema: "http://json.schemastore.org/prettierrc",
 	useTabs: true,
