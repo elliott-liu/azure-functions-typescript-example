@@ -4,12 +4,12 @@ module.exports = {
 	$schema: "http://json.schemastore.org/prettierrc",
 	useTabs: true,
 	endOfLine: "auto",
-	importOrderSeparation: true,
-	importOrderSortSpecifiers: true,
-	importOrderBuiltinModulesToTop: true,
+	importOrder: [
+		"<BUILTIN_MODULES>",
+		"<THIRD_PARTY_MODULES>",
+		"^[.]", // relative imports
+	],
 	importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-	importOrderMergeDuplicateImports: true,
-	importOrderCombineTypeAndValueImports: true,
 	plugins: [
 		"prettier-plugin-packagejson",
 		"@ianvs/prettier-plugin-sort-imports",

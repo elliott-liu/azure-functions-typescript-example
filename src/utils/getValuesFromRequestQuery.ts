@@ -1,3 +1,4 @@
+import { log } from "console";
 import { type HttpRequest } from "@azure/functions";
 import { z } from "zod";
 
@@ -7,6 +8,8 @@ export function getValuesFromRequestQuery<T extends z.ZodTypeAny>(
 ): z.SafeParseReturnType<z.ZodError, z.infer<typeof querySchema>> {
 	const values = valuesFromSearchParams(request.query);
 	return querySchema.safeParse(values);
+
+	log;
 }
 
 function valuesFromSearchParams(requestQuery: URLSearchParams) {
